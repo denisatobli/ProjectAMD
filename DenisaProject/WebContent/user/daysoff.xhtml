@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>User</title>
+	<link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link type="text/css" href="../css/font-awesome.min.css"
+		rel="stylesheet" />
+	<link type="text/css" href="../css/main.css" rel="stylesheet" />
+
+</h:head>
+<h:body>
+	<ui:insert name="header">
+		<ui:include src="../templates/user-header.xhtml">
+			<ui:param name="defaultHeader" value="Default Header" />
+		</ui:include>
+	</ui:insert>
+	<div class="container">
+		<div class="row">
+			<h:form style="text-align: center">
+				<h:commandButton class="emp_button" value="Days off"
+					action="#{employeeBean.showNewOrders}" />
+				<h:commandButton class="emp_button" value="Vacations"
+					action="#{employeeBean.showPreparingOrders}"></h:commandButton>
+				<h:commandButton class="emp_button" value="Compensation days"
+					action="#{employeeBean.showReadyOrders}"></h:commandButton>
+			</h:form>
+			<br/>
+			<br/>
+			<p:panel >
+				<h:form>
+
+					<h2>Days off application</h2>
+					<p:outputLabel for="startDate" value="Start date : " />
+					<p:calendar id="startDate" value="#{productBean.expiryDate}"
+						pattern="yyyy-mm-dd" mask="true" required="true"
+						requiredMessage="Insert start date for your application!">
+						<f:convertDateTime pattern="yyyy-mm-dd" />
+					</p:calendar>
+					<br />
+					<p:outputLabel for="finishDate" value="Finish date : " />
+					<p:calendar id="finishDate" value="#{productBean.expiryDate}"
+						pattern="yyyy-mm-dd" mask="true" required="true"
+						requiredMessage="Insert finish date for your application!">
+						<f:convertDateTime pattern="yyyy-mm-dd" />
+					</p:calendar>
+					<br />
+					<br />
+					<p:outputLabel for="area" value="Description : " />
+					<p:inputTextarea id="area" rows="5" cols="30" maxlength="50"
+						counterTemplate="{0} characters remaining." autoResize="false" />
+					<br />
+					<br />
+					<h:commandButton action="#{register.addEmployee}"
+						style="background: #FE980F; color:FFFFFF; width:250px"
+						value="Apply" class="btn btn-default" imediate="true"></h:commandButton>
+
+				</h:form>
+			</p:panel>
+		</div>
+	</div>
+</h:body>
+
+</html>

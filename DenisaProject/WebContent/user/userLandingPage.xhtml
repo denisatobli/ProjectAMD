@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>User</title>
+	<link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link type="text/css" href="../css/font-awesome.min.css"
+		rel="stylesheet" />
+	<link type="text/css" href="../css/main.css" rel="stylesheet" />
+	
+</h:head>
+<h:body>
+	 <ui:insert name="header">
+		<ui:include src="../templates/user-header.xhtml">
+			<ui:param name="defaultHeader" value="Default Header" />
+		</ui:include>
+	</ui:insert> 
+	<div class="container" style="text-align:center">
+		<div class="row">
+			<h:form>
+				<h:commandButton class="emp_button" value="Days off"
+					action="#{employeeBean.showNewOrders}" />
+				<h:commandButton class="emp_button" value="Vacations"
+					action="#{employeeBean.showPreparingOrders}"></h:commandButton>
+				<h:commandButton class="emp_button" value="Compensation days"
+					action="#{employeeBean.showReadyOrders}"></h:commandButton>
+				</h:form>
+		</div>
+	</div>
+</h:body>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Login</title>
+	<link type="text/css" href="css/bootstrap.min.css" rel="stylesheet" />
+	<link type="text/css" href="css/font-awesome.min.css" rel="stylesheet" />
+	<link type="text/css" href="css/main.css" rel="stylesheet" />
+</h:head>
+<h:body>
+
+	<div style="position: relative; top: 50%;">
+		<div class="col-sm-5" style="position: absolute; left: 30%; top: 50%;">
+			<div class="login-form">
+				<h2>Log In to your account</h2>
+
+				<h:form id="forms">
+					<p:messages id="msgs" for="forms" severity="warn" />
+					<p:growl id="growl" severity="info" />
+					<p:inputText type="email" placeholder="Email" id="email"
+						value="#{user.email}" required="true"
+						requiredMessage="Please insert your email!" display="text" />
+					<p:messages for="email" />
+					<p:inputText type="password" placeholder="Password" id="password"
+						value="#{user.password}" required="true"
+						requiredMessage="Please insert your password!" display="icon" />
+					<p:messages for="password" />
+					<br />
+					<h:commandButton action="#{user.login}" value="Log In"
+						update="msgs" class="btn btn-default"
+						style="background: #FE980F; color:#ffffff">
+					</h:commandButton>
+
+				</h:form>
+
+			</div>
+		</div>
+	</div>
+</h:body>
+</html>

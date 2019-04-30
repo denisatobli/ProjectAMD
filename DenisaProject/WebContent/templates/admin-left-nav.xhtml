@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:body>
+	<p:panel style="margin-top:50px">
+		<h:outputText value="Admin panel"
+			style="font-weight:bold; font-size:20px;" />
+		<p:menu orientation="vertical" style="margin-top:20px" title="fsafs">
+
+			<p:menuitem value="Home Page" url="../admin/adminLandingPage.xhtml"></p:menuitem>
+
+			<p:submenu label="Users">
+				<p:menuitem value="Add user" url="#"></p:menuitem>
+				<p:menuitem value="Edit user" url="#"></p:menuitem>
+				<p:menuitem value="Delete user" url="#"></p:menuitem>
+			</p:submenu>
+
+			<p:submenu label="Applications">
+				<p:menuitem value="Manage applications" url="../admin/manageApplications.xhtml" />
+			</p:submenu>
+
+		</p:menu>
+	</p:panel>
+</h:body>
+</html>

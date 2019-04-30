@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Admin</title>
+	<link type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/css/bootstrap.min.css"
+		rel="stylesheet" />
+	<link type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/css/font-awesome.min.css"
+		rel="stylesheet" />
+	<link type="text/css"
+		href="${facesContext.externalContext.requestContextPath}/css/main.css"
+		rel="stylesheet" />
+</h:head>
+<h:body>
+	<ui:insert name="header">
+		<ui:include src="../templates/admin-header.xhtml">
+			<ui:param name="defaultHeader" value="Default Header" />
+		</ui:include>
+	</ui:insert>
+	<div class="ui-g">
+
+		<ui:insert name="left-nav">
+			<ui:include src="../templates/admin-left-nav.xhtml">
+				<ui:param name="Leftnav" value="Dashboard" />
+			</ui:include>
+		</ui:insert>
+
+		<div class="ui-g-12 ui-md-9 ui-g-nopad">
+			<h2 class="title text-center">Admin dashboard</h2>
+			<h:form>
+				<div class="ui-g-12 ui-g-nopad">
+					<p:panel style="text-align:center">
+						<h2>#{homeBean.displayWelcomeMessage()}</h2>
+					</p:panel>
+				</div>
+			</h:form>
+		</div>
+	</div>
+	<!-- <ui:insert name="footer">
+		<ui:include src="../WEB-INF/templates/footer.xhtml">
+			<ui:param name="defaultFooter" value="Default Footer" />
+		</ui:include>
+	</ui:insert>
+	 -->
+</h:body>
+</html>

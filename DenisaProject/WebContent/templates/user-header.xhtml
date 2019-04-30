@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<body>
+	<!-- Initial right menu -->
+	<div class="header-middle">
+		<div class="container">
+			<div class="row">
+
+				<div class="col-sm-16">
+					<div class="shop-menu pull-right">
+						<!-- upper right menu -->
+						<ul class="nav navbar-nav">
+
+							<h:form>
+								<li><a
+									href="${facesContext.externalContext.requestContextPath}/client/profile.xhtml">
+										<i class="fa fa-user"> #{homeBean.displayWelcomeMessage()}
+									</i>
+								</a></li>
+								<li><a
+									href="${facesContext.externalContext.requestContextPath}/client/shoppingcart.xhtml">
+										<i class="fa fa-shopping-cart"> Home page </i>
+								</a></li>
+								<li><a
+									href="${facesContext.externalContext.requestContextPath}/client/shoppingcart.xhtml">
+										<i class="fa fa-shopping-cart"> See early applications </i>
+								</a></li>
+								<li><h:commandLink id="close" action="#{user.logout}"
+										immediate="true">
+										<i class="fa fa-sign-out"> Log Out</i>
+									</h:commandLink></li>
+							</h:form>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

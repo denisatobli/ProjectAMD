@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>User</title>
+	<link type="text/css" href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link type="text/css" href="../css/font-awesome.min.css"
+		rel="stylesheet" />
+	<link type="text/css" href="../css/main.css" rel="stylesheet" />
+
+</h:head>
+<h:body>
+	<ui:insert name="header">
+		<ui:include src="../templates/user-header.xhtml">
+			<ui:param name="defaultHeader" value="Default Header" />
+		</ui:include>
+	</ui:insert>
+	<div class="container">
+		<div class="row">
+			<p:panel >
+				<h:form>
+					<p:growl id="msgs" showDetail="true" />
+					<p:dataTable id="prod" var="productVar"
+						value="#{productBean.products}" editable="true"
+						style="margin-bottom:20px">
+						<f:facet name="header">
+							<h:outputText value="Produktet" />
+						</f:facet>
+						<!-- <p:ajax event="rowEdit" listener="#{market.onRowEdit}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel" listener="#{market.onRowCancel}"
+							update=":form:msgs" /> -->
+
+						
+						<p:column headerText="Start date">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{productVar.product.expiryDate}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{productVar.product.expiryDate}"
+										style="width:100%" label="date" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Finish date">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{productVar.product.expiryDate}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{productVar.product.expiryDate}"
+										style="width:100%" label="date" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Description">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{productVar.product.expiryDate}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{productVar.product.expiryDate}"
+										style="width:100%" label="date" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Days remaining">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{productVar.product.expiryDate}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{productVar.product.expiryDate}"
+										style="width:100%" label="date" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						
+
+						<p:column style="width:85px">
+							<h:commandButton value="Delete " class="btn btn-danger"
+								action="#{productBean.deleteProduct(productVar.id)}"
+								ajax="false" validateClient="true" style="margin-right:10px" />
+						</p:column>
+						<p:column style="width:45px">
+									<p:growl id="growl" showDetail="false" sticky="false" />
+									<p:rowEditor />
+								</p:column>
+					</p:dataTable>
+				</h:form>
+			</p:panel>
+		</div>
+	</div>
+</h:body>
+
+</html>

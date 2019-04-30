@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Add User</title>
+	<link href="../css/bootstrap.min.css" rel="stylesheet" />
+	<link href="../css/font-awesome.min.css" rel="stylesheet" />
+	<link href="../css/main.css" rel="stylesheet" />
+
+</h:head>
+
+<h:body>
+	<ui:insert name="header">
+		<ui:include src="../templates/admin-header.xhtml">
+			<ui:param name="defaultHeader" value="Default Header" />
+		</ui:include>
+	</ui:insert>
+	<div class="ui-g">
+
+		<ui:insert name="left-nav">
+			<ui:include src="../templates/admin-left-nav.xhtml">
+				<ui:param name="Leftnav" value="Dashboard" />
+			</ui:include>
+		</ui:insert>
+
+		<div class="ui-g-12 ui-md-9 ui-g-nopad">
+			<h2 class="title text-center">Admin dashboard</h2>
+			<h:form>
+				<div class="ui-g-12 ui-g-nopad">
+					<p:panel>
+						<div class="container">
+							<div class="row">
+								<div class="col-sm-4 col-sm-offset-1">
+									<div class="signup-form">
+										<h:form>
+											<h2>Add User</h2>
+											<p:growl id="growl" showDetail="true" sticky="false"
+												style="font-color:red" />
+
+											<p:outputLabel for="userName" value="Name : " />
+											<br />
+											<p:inputText type="text" id="userName"
+												value="#{register.name}" required="true"
+												requiredMessage="Insert the name of the user you want to add !"
+												validatorMessage="Name should contain only letters!">
+												<f:validateRegex pattern="[a-zA-Z]+" />
+											</p:inputText>
+											<br />
+											<p:outputLabel for="userLastname" value="Lastname :" />
+											<br />
+											<p:inputText type="text" id="userLastname"
+												value="#{register.surname}" required="true"
+												requiredMessage="Insert the lastname of the user you want to add !"
+												validatorMessage="Lastname should contain only letters!">
+												<f:validateRegex pattern="[a-zA-Z]+" />
+											</p:inputText>
+											<br />
+
+											<p:outputLabel for="email" value="Email : " />
+											<br />
+											<p:inputText type="email" id="email"
+												value="#{register.email}" required="true"
+												requiredMessage="Insert your email address" />
+											<br />
+
+											<p:outputLabel for="password" value="Password : " />
+											<br />
+											<p:inputText type="password" id="password"
+												value="#{register.password}" required="true"
+												requiredMessage="Insert the password for user account!"
+												validatorMessage="Password should contain at least 8 characters">
+												<f:validateLength minimum="8" />
+											</p:inputText>
+											<br />
+											<p:outputLabel for="phoneNumber"
+												value="Phone number : " />
+											<br />
+											<p:inputText type="text" id="phoneNumber"
+												value="#{register.phoneNumber}" required="true"
+												requiredMessage="Insert user phone number!"
+												validatorMessage="Should contain only numbers and have 8 characters!">
+												<f:validateLength minimum="10" maximum="10" />
+												<f:validateRegex pattern="[0-9]+" />
+											</p:inputText>
+											
+											<br />
+											<br />
+
+											<h:commandButton action="#{register.addEmployee}"
+												style="background: #FE980F; color:FFFFFF; width:250px"
+												value="Add user" class="btn btn-default" imediate="true"></h:commandButton>
+
+										</h:form>
+
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</p:panel>
+				</div>
+			</h:form>
+		</div>
+	</div>
+</h:body>
+</html>
