@@ -39,8 +39,9 @@ public class UserService {
 		return UserConverter.entityToModel(userRepository.getUserByEmail(email));
 	}
 
-	
-
+	public boolean insertUser(String firstname, String lastname, String email, String password, String phoneNumber) {
+		return userRepository.insertUser(firstname, lastname, email, password, phoneNumber);
+	}
 	
 	public UserModel getLoggedUser() {
 		UserModel user = null;

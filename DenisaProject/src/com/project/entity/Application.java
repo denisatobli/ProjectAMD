@@ -1,10 +1,10 @@
 package com.project.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "application")
-public class Application {
+public class Application implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -94,6 +94,13 @@ public class Application {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	@Override
+	public String toString() {
+		return "Application [applicationId=" + applicationId + ", type=" + type + ", startDate=" + startDate
+				+ ", finishDate=" + finishDate + ", description=" + description + ", isApproved=" + isApproved
+				+ ", user=" + user + "]";
 	}
 	
 }

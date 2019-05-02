@@ -25,7 +25,6 @@
 		</ui:include>
 	</ui:insert>
 	<div class="ui-g">
-
 		<ui:insert name="left-nav">
 			<ui:include src="../templates/admin-left-nav.xhtml">
 				<ui:param name="Leftnav" value="Dashboard" />
@@ -34,74 +33,81 @@
 
 		<div class="ui-g-12 ui-md-9 ui-g-nopad">
 			<h2 class="title text-center">Admin dashboard</h2>
-			<h:form>
-				
-				<p:growl id="growl" showDetail="false" sticky="false" />
+			<div class="ui-g-12 ui-g-nopad">
 
-				<div class="ui-g-12 ui-g-nopad">
-					<p:panel>
-						<h:form id="form">
+				<p:panel style="text-align:center">
+					<h:form id="form" style="margin:auto">
+						<p:growl id="growl" showDetail="false" sticky="true"
+							style="font-color:red" />
+						<p:dataTable id="app" var="appVar"
+							value="#{applicationBean.applications}" editable="true"
+							style="margin-bottom:20px">
 
-							<p:dataTable id="app" var="appVar"
-								value="#{employeeManagBean.employees}" editable="true"
-								style="margin-bottom:20px">
+							<f:facet name="header">
 								<h:outputText value="Applications" />
+							</f:facet>
 
-								<p:column headerText="Name">
-									
-										<f:facet name="output">
-											<h:outputText value="#{employeeVar.name}" />
-										</f:facet>
-								</p:column>
-								<p:column headerText="LastName">
-									
-										<f:facet name="output">
-											<h:outputText value="#{employeeVar.surname}" />
-										</f:facet>
-										
-								</p:column>
+							<p:column headerText="Firstname">
+								<h:outputText value="#{appVar.userModel.firstname}" />
+							</p:column>
 
-								<p:column headerText="Start Date">
-									
-										<f:facet name="output">
-											<h:outputText value="#{employeeVar.email}" />
-										</f:facet>
-										
-								</p:column>
+							<p:column headerText="Lastname">
+								<h:outputText value="#{appVar.userModel.lastname}" />
+							</p:column>
 
-								<p:column headerText="Finish Date">
-										<f:facet name="output">
-											<h:outputText value="#{employeeVar.password}" />
-										</f:facet>
-										
-								</p:column>
+							<p:column headerText="Start Date">
+								<h:outputText value="#{appVar.startDate}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</h:outputText>
+							</p:column>
 
-								<p:column headerText="Description">
-										<f:facet name="output">
-											<h:outputText value="#{employeeVar.address}" />
-										</f:facet>
-										
-								</p:column>
-								
-								<p:column style="width:85px">
-									<h:commandButton value="Approve" class="btn btn-success"
-										action="#{employeeManagBean.deleteEmployee(employeeVar.userId)}"
-										ajax="false" validateClient="true" />
+							<p:column headerText="Finish Date">
+								<h:outputText value="#{appVar.finishDate}">
+									<f:convertDateTime pattern="yyyy-MM-dd" />
+								</h:outputText>
+							</p:column>
 
-								</p:column>
-							
-								<p:column style="width:85px">
-									<h:commandButton value="Reject" class="btn btn-danger"
-										action="#{employeeManagBean.deleteEmployee(employeeVar.userId)}"
-										ajax="false" validateClient="true" />
+							<p:column headerText="Description">
+								<h:outputText value="#{appVar.description}" />
+							</p:column>
 
-								</p:column>
-							</p:dataTable>
-						</h:form>
-					</p:panel>
-				</div>
-			</h:form>
-				
+							<p:column headerText="Type">
+								<h:outputText value="#{appVar.typeModel.type}" />
+							</p:column>
+
+							<p:column style="width:85px">
+								<h:form rendered="#{appVar.isApproved()=='false'}">
+									<h:commandButton value="Approve " class="btn btn-success"
+										action="#{applicationBean.approveApplication(appVar.applicationId)}"
+										ajax="false" validateClient="true" style="margin-right:10px" />
+								</h:form>
+								<h:form rendered="#{appVar.isApproved()}">
+									<h:commandButton value="Approve " class="btn btn-success"
+										action="#{applicationBean.approveApplication(appVar.applicationId)}"
+										ajax="false" validateClient="true" style="margin-right:10px"
+										disabled="true" />
+
+								</h:form>
+							</p:column>
+							<p:column style="width:85px">
+								<h:form rendered="#{appVar.isApproved()}">
+									<h:commandButton value="Reject " class="btn btn-danger"
+										action="#{applicationBean.rejectApplication(appVar.applicationId)}"
+										ajax="false" validateClient="true" style="margin-right:10px" />
+								</h:form>
+								<h:form rendered="#{appVar.isApproved()=='false'}">
+									<h:commandButton value="Reject " class="btn btn-danger"
+										action="#{applicationBean.rejectApplication(appVar.applicationId)}"
+										ajax="false" validateClient="true" style="margin-right:10px"
+										disabled="true" />
+
+								</h:form>
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</p:panel>
+			</div>
+
 		</div>
 	</div>
 	<!-- <ui:insert name="footer">

@@ -2,17 +2,15 @@ package com.project.model;
 
 import java.util.Date;
 
-import com.project.entity.User;
-
 public class ApplicationModel {
 	
 	private Integer applicationId;
-	private String type;
+	private TypeModel typeModel;
 	private Date startDate;
 	private Date finishDate;
 	private String description;
 	private boolean isApproved;
-	private User user;
+	private UserModel userModel;
 	
 	public Integer getApplicationId() {
 		return applicationId;
@@ -20,11 +18,12 @@ public class ApplicationModel {
 	public void setApplicationId(Integer applicationId) {
 		this.applicationId = applicationId;
 	}
-	public String getType() {
-		return type;
+	
+	public TypeModel getTypeModel() {
+		return typeModel;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setTypeModel(TypeModel typeModel) {
+		this.typeModel = typeModel;
 	}
 	public Date getStartDate() {
 		return startDate;
@@ -50,11 +49,19 @@ public class ApplicationModel {
 	public void setApproved(boolean isApproved) {
 		this.isApproved = isApproved;
 	}
-	public User getUser() {
-		return user;
+	public UserModel getUserModel() {
+		return userModel;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public void setUserModel(UserModel userModel) {
+		this.userModel = userModel;
 	}
+	@Override
+	public String toString() {
+		return "ApplicationModel [applicationId=" + applicationId + ", typeModel=" + typeModel + ", startDate="
+				+ startDate + ", finishDate=" + finishDate + ", description=" + description + ", isApproved="
+				+ isApproved + ", userModel=" + userModel + "]";
+	}
+	
+	
 
 }

@@ -23,76 +23,68 @@
 	</ui:insert>
 	<div class="container">
 		<div class="row">
-			<p:panel >
-				<h:form>
-					<p:growl id="msgs" showDetail="true" />
-					<p:dataTable id="prod" var="productVar"
-						value="#{productBean.products}" editable="true"
+			<p:panel>
+				<h:form id="form" style="margin:auto">
+					<p:growl id="msgs" showDetail="false" />
+					<p:dataTable id="app" var="appVar"
+						value="#{applicationBean.applications}" editable="true"
 						style="margin-bottom:20px">
 						<f:facet name="header">
-							<h:outputText value="Produktet" />
+							<h:outputText value="Applications" />
 						</f:facet>
-						<!-- <p:ajax event="rowEdit" listener="#{market.onRowEdit}"
+						<p:ajax event="rowEdit" listener="#{applicationBean.onRowEdit}"
 							update=":form:msgs" />
-						<p:ajax event="rowEditCancel" listener="#{market.onRowCancel}"
-							update=":form:msgs" /> -->
+						<p:ajax event="rowEditCancel"
+							listener="#{applicationBean.onRowCancel}" update=":form:msgs" />
 
-						
-						<p:column headerText="Start date">
+						<p:column headerText="Start Date">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{productVar.product.expiryDate}" />
+									<h:outputText value="#{appVar.startDate}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText value="#{productVar.product.expiryDate}"
-										style="width:100%" label="date" />
+									<p:inputText value="#{appVar.startDate}" style="width:100%"
+										label="startDate" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Finish date">
+
+						<p:column headerText="Finish Date">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{productVar.product.expiryDate}" />
+									<h:outputText value="#{appVar.finishDate}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText value="#{productVar.product.expiryDate}"
-										style="width:100%" label="date" />
+									<p:inputText value="#{appVar.finishDate}" style="width:100%"
+										label="price" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
+
 						<p:column headerText="Description">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{productVar.product.expiryDate}" />
+									<h:outputText value="#{appVar.description}" />
 								</f:facet>
 								<f:facet name="input">
-									<p:inputText value="#{productVar.product.expiryDate}"
-										style="width:100%" label="date" />
+									<p:inputText value="#{appVar.description}" style="width:100%"
+										label="stock" />
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
-						<p:column headerText="Days remaining">
-							<p:cellEditor>
-								<f:facet name="output">
-									<h:outputText value="#{productVar.product.expiryDate}" />
-								</f:facet>
-								<f:facet name="input">
-									<p:inputText value="#{productVar.product.expiryDate}"
-										style="width:100%" label="date" />
-								</f:facet>
-							</p:cellEditor>
+						<p:column headerText="Type">
+							<h:outputText value="#{appVar.typeModel.type}" />
 						</p:column>
-						
 
 						<p:column style="width:85px">
 							<h:commandButton value="Delete " class="btn btn-danger"
-								action="#{productBean.deleteProduct(productVar.id)}"
+								action="#{applicationBean.deleteApplication(appVar.applicationId)}"
 								ajax="false" validateClient="true" style="margin-right:10px" />
 						</p:column>
-						<p:column style="width:45px">
-									<p:growl id="growl" showDetail="false" sticky="false" />
-									<p:rowEditor />
-								</p:column>
+						<p:column style="width:35px">
+
+							<p:rowEditor />
+						</p:column>
 					</p:dataTable>
 				</h:form>
 			</p:panel>
