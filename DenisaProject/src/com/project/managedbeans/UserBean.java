@@ -128,7 +128,7 @@ public class UserBean implements Serializable{
 		HttpSession session = SessionUtils.getSession();
 		if (session != null)
 			session.invalidate();
-		return "/index.xhtml?faces-redirect=true";
+		return "/login.xhtml?faces-redirect=true";
 	}
 
 }

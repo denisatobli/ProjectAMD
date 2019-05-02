@@ -99,11 +99,11 @@ public class ApplicationBean implements Serializable{
 		ApplicationModel applicationModel = (ApplicationModel) event.getObject();
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (applicationService.updateApplication(applicationModel)) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!",
-					"Application edited!"));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application edited!",
+					null));
 		} else {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, null ,
-					"Not edited!"));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Application not edited!",
+					null));
 		}
 		return "previousApplications";
 	}

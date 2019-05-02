@@ -25,13 +25,17 @@
 		<div class="row">
 			<p:panel>
 				<h:form id="form" style="margin:auto">
+
 					<p:growl id="msgs" showDetail="false" />
+
 					<p:dataTable id="app" var="appVar"
 						value="#{applicationBean.applications}" editable="true"
 						style="margin-bottom:20px">
+
 						<f:facet name="header">
 							<h:outputText value="Applications" />
 						</f:facet>
+
 						<p:ajax event="rowEdit" listener="#{applicationBean.onRowEdit}"
 							update=":form:msgs" />
 						<p:ajax event="rowEditCancel"
@@ -40,11 +44,15 @@
 						<p:column headerText="Start Date">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{appVar.startDate}" />
+									<h:outputText value="#{appVar.startDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
 								</f:facet>
 								<f:facet name="input">
 									<p:inputText value="#{appVar.startDate}" style="width:100%"
-										label="startDate" />
+										label="startDate">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+										</p:inputText>
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -52,11 +60,15 @@
 						<p:column headerText="Finish Date">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{appVar.finishDate}" />
+									<h:outputText value="#{appVar.finishDate}">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+									</h:outputText>
 								</f:facet>
 								<f:facet name="input">
 									<p:inputText value="#{appVar.finishDate}" style="width:100%"
-										label="price" />
+										label="finishDate">
+										<f:convertDateTime pattern="yyyy-MM-dd" />
+										</p:inputText>
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -72,6 +84,7 @@
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
+
 						<p:column headerText="Type">
 							<h:outputText value="#{appVar.typeModel.type}" />
 						</p:column>
@@ -82,7 +95,6 @@
 								ajax="false" validateClient="true" style="margin-right:10px" />
 						</p:column>
 						<p:column style="width:35px">
-
 							<p:rowEditor />
 						</p:column>
 					</p:dataTable>
