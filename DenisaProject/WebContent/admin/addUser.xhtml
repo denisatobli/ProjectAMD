@@ -39,7 +39,7 @@
 									<div class="signup-form">
 										<h:form>
 											<h2>Add User</h2>
-											<p:growl id="growl" showDetail="false" sticky="true"
+											<p:growl id="growl" showDetail="false" sticky="false"
 												style="font-color:red" />
 
 											<p:outputLabel for="userName" value="Name : " />
@@ -83,7 +83,7 @@
 											<p:inputText type="text" id="phoneNumber"
 												value="#{user.phoneNumber}" required="true"
 												requiredMessage="Insert user phone number!"
-												validatorMessage="Should contain only numbers and have 8 characters!">
+												validatorMessage="Should contain only numbers and have 10 characters!">
 												<f:validateLength minimum="10" maximum="10" />
 												<f:validateRegex pattern="[0-9]+" />
 											</p:inputText>

@@ -28,8 +28,8 @@ public class ApplicationConverter {
 		if (applicationModel != null) {
 			Application application = new Application();
 			application.setApplicationId(applicationModel.getApplicationId());
-			application.setStartDate(applicationModel.getStartDate());
-			application.setFinishDate(applicationModel.getFinishDate());
+			application.setStartDate(convertUtilToSql(applicationModel.getStartDate()));
+			application.setFinishDate(convertUtilToSql(applicationModel.getFinishDate()));
 			application.setDescription(applicationModel.getDescription());
 			application.setApproved(applicationModel.isApproved());
 			application.setUser(UserConverter.modelToEntity(applicationModel.getUserModel()));
@@ -58,6 +58,11 @@ public class ApplicationConverter {
 			}
 		}
 		return applicationsEntity;
+	}
+	
+	private static java.sql.Date convertUtilToSql(java.util.Date uDate){
+		java.sql.Date sDate = new java.sql.Date(uDate.getTime());
+		return sDate;
 	}
 
 }

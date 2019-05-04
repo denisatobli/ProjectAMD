@@ -7,15 +7,23 @@ import com.project.model.*;
 import com.project.repository.ApplicationRepository;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
-public class ApplicationService  {
-	
+public class ApplicationService implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private ApplicationRepository applicationRepo = new ApplicationRepository();
 
 	public List<ApplicationModel> getAllApplications() {
 		return ApplicationConverter.listEntityToModel(applicationRepo.getAllApplications());
+	}
+
+	public List<ApplicationModel> getUserApplications(Integer userId) {
+		return ApplicationConverter.listEntityToModel(applicationRepo.getUserApplications(userId));
 	}
 
 	public List<TypeModel> getAllApplicationTypes() {
@@ -49,7 +57,25 @@ public class ApplicationService  {
 	}
 
 	public boolean updateApplication(ApplicationModel applicationModel) {
-		return applicationRepo.updateApplication(applicationModel.getApplicationId(), applicationModel.getStartDate(),
-				applicationModel.getFinishDate(), applicationModel.getDescription());
+		applicationModel.setStartDate(applicationModel.getStartDate());
+		applicationModel.setFinishDate(applicationModel.getFinishDate());
+		applicationModel.setDescription(applicationModel.getDescription());
+		return applicationRepo.updateApplication(ApplicationConverter.modelToEntity(applicationModel));
 	}
+
+	public long getRemainingDays(Date startDate, Date finishDate) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date currentDate = new Date();
+		dateFormat.format(currentDate);
+		long diff;
+		if (startDate.compareTo(currentDate) < 0) {
+			diff = finishDate.getTime() - currentDate.getTime();
+		} else if (startDate.compareTo(currentDate) > 0) {
+			diff = finishDate.getTime() - startDate.getTime();
+		} else {
+			diff = finishDate.getTime() - startDate.getTime();
+		}
+		return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+	}
+
 }

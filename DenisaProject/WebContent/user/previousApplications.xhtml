@@ -29,7 +29,7 @@
 					<p:growl id="msgs" showDetail="false" />
 
 					<p:dataTable id="app" var="appVar"
-						value="#{applicationBean.applications}" editable="true"
+						value="#{applicationBean.userApplications}" editable="true"
 						style="margin-bottom:20px">
 
 						<f:facet name="header">
@@ -44,15 +44,13 @@
 						<p:column headerText="Start Date">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{appVar.startDate}">
-										<f:convertDateTime pattern="yyyy-MM-dd" />
-									</h:outputText>
+									<h:outputText value="#{appVar.startDate}" />
 								</f:facet>
 								<f:facet name="input">
 									<p:inputText value="#{appVar.startDate}" style="width:100%"
 										label="startDate">
 										<f:convertDateTime pattern="yyyy-MM-dd" />
-										</p:inputText>
+									</p:inputText>
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -60,15 +58,13 @@
 						<p:column headerText="Finish Date">
 							<p:cellEditor>
 								<f:facet name="output">
-									<h:outputText value="#{appVar.finishDate}">
-										<f:convertDateTime pattern="yyyy-MM-dd" />
-									</h:outputText>
+									<h:outputText value="#{appVar.finishDate}" />
 								</f:facet>
 								<f:facet name="input">
 									<p:inputText value="#{appVar.finishDate}" style="width:100%"
 										label="finishDate">
 										<f:convertDateTime pattern="yyyy-MM-dd" />
-										</p:inputText>
+									</p:inputText>
 								</f:facet>
 							</p:cellEditor>
 						</p:column>
@@ -87,6 +83,10 @@
 
 						<p:column headerText="Type">
 							<h:outputText value="#{appVar.typeModel.type}" />
+						</p:column>
+						<p:column headerText="Days Remaining">
+							<h:outputText
+								value="#{applicationBean.getRemainingDays(appVar.startDate,appVar.finishDate)+1}" />
 						</p:column>
 
 						<p:column style="width:85px">

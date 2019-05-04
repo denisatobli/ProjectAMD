@@ -20,8 +20,8 @@ import com.project.service.UserService;
 
 @ManagedBean(name = "applicationBean")
 @ViewScoped
-public class ApplicationBean implements Serializable{
-	
+public class ApplicationBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	private Integer applicationId;
 	private Date startDate;
@@ -33,13 +33,16 @@ public class ApplicationBean implements Serializable{
 	private String selectedType;
 
 	private List<ApplicationModel> applications;
+	private List<ApplicationModel> userApplications;
 	private List<TypeModel> types;
 	private ApplicationService applicationService = new ApplicationService();
 	private UserService userService = new UserService();
 
 	@PostConstruct
 	public void init() {
-		applications = applicationService.getAllApplications();
+		applications=applicationService.getAllApplications();
+		System.out.println(applications);
+		userApplications=applicationService.getUserApplications(userService.getLoggedUser().getUserId());
 		types = applicationService.getAllApplicationTypes();
 	}
 
@@ -53,8 +56,8 @@ public class ApplicationBean implements Serializable{
 		if (typeModel != null) {
 			if (applicationService.addApplication(startDate, finishDate, description, userService.getLoggedUser(),
 					typeModel)) {
-				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Your application was successfully completed!",
-						null));
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
+						"Your application was successfully completed!", null));
 			} else {
 				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
 						"Your application was not completed, something went wrong!", null));
@@ -64,28 +67,26 @@ public class ApplicationBean implements Serializable{
 	}
 
 	public String approveApplication(Integer applicationId) {
-		System.out.println("approveApplication"+applicationId);
+		System.out.println("approveApplication" + applicationId);
 		FacesContext context = FacesContext.getCurrentInstance();
-		if(applicationService.updateApplicationApproval(applicationId, true)) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!",
-					"Application approved!"));
+		if (applicationService.updateApplicationApproval(applicationId, true)) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application approved!", null));
 		}
-		return "admin/manageApplication?faces-redirect=true";
+		return "/manageApplication?faces-redirect=true";
 	}
 
 	public String rejectApplication(Integer applicationId) {
-		System.out.println("rejectApplication"+applicationId);
+		System.out.println("rejectApplication" + applicationId);
 		FacesContext context = FacesContext.getCurrentInstance();
-		if(applicationService.updateApplicationApproval(applicationId, false)) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info!",
-					"Application rejected!"));
+		if (applicationService.updateApplicationApproval(applicationId, false)) {
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application rejected!", null));
 		}
-		return "admin/manageApplication?faces-redirect=true";
+		return "/manageApplication?faces-redirect=true";
 	}
-	
+
 	public String deleteApplication(Integer applicationId) {
 		FacesContext context = FacesContext.getCurrentInstance();
-		
+
 		if (applicationService.deleteApplication(applicationId)) {
 			context.addMessage(null, new FacesMessage("Successful deleted", null));
 		} else {
@@ -93,17 +94,15 @@ public class ApplicationBean implements Serializable{
 		}
 		return "/previousApplication?faces-redirect=true";
 	}
-	
+
 	public String onRowEdit(RowEditEvent event) {
 		System.out.println("editttttttttt");
 		ApplicationModel applicationModel = (ApplicationModel) event.getObject();
 		FacesContext context = FacesContext.getCurrentInstance();
 		if (applicationService.updateApplication(applicationModel)) {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application edited!",
-					null));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application edited!", null));
 		} else {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Application not edited!",
-					null));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Application not edited!", null));
 		}
 		return "previousApplications";
 	}
@@ -123,10 +122,16 @@ public class ApplicationBean implements Serializable{
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
-	
-	
-	
-	
+	public Date getCurrentDate() {
+		long millis = System.currentTimeMillis();
+		Date todDate = new java.util.Date(millis);
+		System.out.println(todDate);
+		return todDate ;
+	}
+
+	public long getRemainingDays(Date startDate,Date finishDate) {
+		return applicationService.getRemainingDays(startDate,finishDate);
+	}
 
 	public Integer getApplicationId() {
 		return applicationId;
@@ -207,11 +212,20 @@ public class ApplicationBean implements Serializable{
 	public void setSelectedType(String selectedType) {
 		this.selectedType = selectedType;
 	}
+	public List<ApplicationModel> getUserApplications() {
+		return userApplications;
+	}
+
+	public void setUserApplications(List<ApplicationModel> userApplications) {
+		this.userApplications = userApplications;
+	}
 
 	@Override
 	public String toString() {
 		return "ApplicationBean [startDate=" + startDate + ", finishDate=" + finishDate + ", description=" + description
 				+ ", isApproved=" + isApproved + ", user=" + userModel + ", type=" + typeModel + "]";
 	}
+
+	
 
 }

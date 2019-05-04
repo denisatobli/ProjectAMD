@@ -1,7 +1,7 @@
 package com.project.repository;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -35,6 +35,28 @@ public class ApplicationRepository {
 		}
 	}
 
+	public  List<Application> getUserApplications(Integer userId) {
+		try {
+			em = JPAUtils.getFactory().createEntityManager();
+			tx = em.getTransaction();
+			tx.begin();
+			List<Application> applications = new ArrayList<>();
+			TypedQuery<Application> query = em.createQuery("Select a from Application a where a.user.userId=:userId", Application.class);
+			query.setParameter("userId", userId);
+			applications = query.getResultList();
+			tx.commit();
+			return applications;
+		} catch (Exception e) {
+			if (tx.isActive() && tx != null) {
+				tx.rollback();
+			}
+			System.out.print("Something went wrong ");
+			return null;
+		} finally {
+			em.close();
+		}
+	}
+	
 	public List<Type> getAllApplicationTypes() {
 		try {
 			em = JPAUtils.getFactory().createEntityManager();
@@ -56,14 +78,17 @@ public class ApplicationRepository {
 		}
 	}
 
-	public boolean addApplication(Date startDate, Date finishDate, String description, User user, Type type) {
+	public boolean addApplication(java.util.Date startDate, java.util.Date finishDate, String description, User user,
+			Type type) {
 		try {
 			em = JPAUtils.getFactory().createEntityManager();
 			tx = em.getTransaction();
 			tx.begin();
+			Date sql_StartDate = new java.sql.Date(startDate.getTime() );
+			Date sql_FinishDate = new java.sql.Date( finishDate.getTime() );
 			Application application = new Application();
-			application.setStartDate(startDate);
-			application.setFinishDate(finishDate);
+			application.setStartDate(sql_StartDate);
+			application.setFinishDate(sql_FinishDate);
 			application.setDescription(description);
 			application.setApproved(false);
 			application.setUser(user);
@@ -89,7 +114,6 @@ public class ApplicationRepository {
 			Application application = em.find(Application.class, applicationId);
 			tx.begin();
 			application.setApproved(isApproved);
-			;
 			tx.commit();
 			return true;
 		} catch (Exception e) {
@@ -120,15 +144,12 @@ public class ApplicationRepository {
 		return false;
 	}
 
-	public boolean updateApplication(Integer applicationId, Date startDate, Date finishDate, String description) {
+	public boolean updateApplication(Application application) {
 		try {
 			em = JPAUtils.getFactory().createEntityManager();
 			tx = em.getTransaction();
-			Application application = em.find(Application.class, applicationId);
 			tx.begin();
-			application.setStartDate(startDate);
-			application.setFinishDate(finishDate);
-			application.setDescription(description);
+			em.merge(application);
 			tx.commit();
 			return true;
 		} catch (Exception e) {

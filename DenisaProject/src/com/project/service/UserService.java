@@ -1,12 +1,6 @@
 package com.project.service;
 
-import java.util.List;
-import java.util.UUID;
-
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
 
 import com.project.converters.UserConverter;
 import com.project.model.UserModel;
