@@ -18,8 +18,8 @@ public class ApplicationService implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private ApplicationRepository applicationRepo = new ApplicationRepository();
 
-	public List<ApplicationModel> getAllApplications() {
-		return ApplicationConverter.listEntityToModel(applicationRepo.getAllApplications());
+	public List<ApplicationModel> getAllApplications(boolean isApproved) {
+		return ApplicationConverter.listEntityToModel(applicationRepo.getAllApplications(isApproved));
 	}
 
 	public List<ApplicationModel> getUserApplications(Integer userId) {
@@ -68,7 +68,9 @@ public class ApplicationService implements Serializable {
 		Date currentDate = new Date();
 		dateFormat.format(currentDate);
 		long diff;
-		if (startDate.compareTo(currentDate) < 0) {
+		if (finishDate.compareTo(currentDate) <= 0) {
+			return -2;
+		} else if (startDate.compareTo(currentDate) < 0) {
 			diff = finishDate.getTime() - currentDate.getTime();
 		} else if (startDate.compareTo(currentDate) > 0) {
 			diff = finishDate.getTime() - startDate.getTime();

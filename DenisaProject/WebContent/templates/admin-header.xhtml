@@ -17,11 +17,11 @@
 					<ul class="nav navbar-nav">
 						<h:form>
 							<li><a href="#"> <i class="fa fa-user">
-										#{homeBean.displayWelcomeMessage()} </i>
+										#{user.displayWelcomeMessage()} </i>
 							</a></li>
 							<li><h:commandLink id="close" action="#{user.logout}"
 									immediate="true">
-									<i class="fa fa-sign-out"> Log Out</i>
+									<i class="fa fa-lock"> Log Out</i>
 								</h:commandLink></li>
 						</h:form>
 					</ul>

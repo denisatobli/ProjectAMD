@@ -42,9 +42,9 @@
 											<p:growl id="growl" showDetail="false" sticky="false"
 												style="font-color:red" />
 
-											<p:outputLabel for="userName" value="Name : " />
+											<p:outputLabel for="userName" value="Firstname : " />
 											<br />
-											<p:inputText type="text" id="userName"
+											<p:inputText type="text" id="userName" 
 												value="#{user.firstname}" required="true"
 												requiredMessage="Insert the name of the user you want to add !"
 												validatorMessage="Name should contain only letters!">
@@ -63,9 +63,8 @@
 
 											<p:outputLabel for="email" value="Email : " />
 											<br />
-											<p:inputText type="email" id="email"
-												value="#{user.email}" required="true"
-												requiredMessage="Insert your email address" />
+											<p:inputText type="email" id="email" value="#{user.email}"
+												required="true" requiredMessage="Insert your email address" />
 											<br />
 
 											<p:outputLabel for="password" value="Password : " />
@@ -77,8 +76,7 @@
 												<f:validateLength minimum="8" />
 											</p:inputText>
 											<br />
-											<p:outputLabel for="phoneNumber"
-												value="Phone number : " />
+											<p:outputLabel for="phoneNumber" value="Phone number : " />
 											<br />
 											<p:inputText type="text" id="phoneNumber"
 												value="#{user.phoneNumber}" required="true"
@@ -87,13 +85,17 @@
 												<f:validateLength minimum="10" maximum="10" />
 												<f:validateRegex pattern="[0-9]+" />
 											</p:inputText>
-											
+
 											<br />
 											<br />
 
 											<h:commandButton action="#{user.insertUser}"
 												style="background: #FE980F; color:FFFFFF; width:250px"
 												value="Add user" class="btn btn-default" imediate="true"></h:commandButton>
+											<br/>
+											<h:commandButton style="background: #d3cac6; color:FFFFFF; width:250px"
+											value="Reset" type="reset"
+												class="btn btn-default" />
 
 										</h:form>
 

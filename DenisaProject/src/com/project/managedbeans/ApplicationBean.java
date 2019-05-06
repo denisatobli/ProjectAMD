@@ -32,7 +32,8 @@ public class ApplicationBean implements Serializable {
 	private TypeModel typeModel;
 	private String selectedType;
 
-	private List<ApplicationModel> applications;
+	private List<ApplicationModel> approvedApplications;
+	private List<ApplicationModel> rejectedApplications;
 	private List<ApplicationModel> userApplications;
 	private List<TypeModel> types;
 	private ApplicationService applicationService = new ApplicationService();
@@ -40,9 +41,9 @@ public class ApplicationBean implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		applications=applicationService.getAllApplications();
-		System.out.println(applications);
-		userApplications=applicationService.getUserApplications(userService.getLoggedUser().getUserId());
+		approvedApplications = applicationService.getAllApplications(true);
+		rejectedApplications = applicationService.getAllApplications(false);
+		userApplications = applicationService.getUserApplications(userService.getLoggedUser().getUserId());
 		types = applicationService.getAllApplicationTypes();
 	}
 
@@ -72,7 +73,7 @@ public class ApplicationBean implements Serializable {
 		if (applicationService.updateApplicationApproval(applicationId, true)) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application approved!", null));
 		}
-		return "/manageApplication?faces-redirect=true";
+		return "manageRejectedApplication";
 	}
 
 	public String rejectApplication(Integer applicationId) {
@@ -81,7 +82,7 @@ public class ApplicationBean implements Serializable {
 		if (applicationService.updateApplicationApproval(applicationId, false)) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application rejected!", null));
 		}
-		return "/manageApplication?faces-redirect=true";
+		return "manageApprovedApplication";
 	}
 
 	public String deleteApplication(Integer applicationId) {
@@ -115,22 +116,22 @@ public class ApplicationBean implements Serializable {
 	public void onCellEdit(CellEditEvent event) {
 		Object oldValue = event.getOldValue();
 		Object newValue = event.getNewValue();
-
 		if (newValue != null && !newValue.equals(oldValue)) {
 			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Cell Changed",
 					"Old: " + oldValue + ", New:" + newValue);
 			FacesContext.getCurrentInstance().addMessage(null, msg);
 		}
 	}
+
 	public Date getCurrentDate() {
 		long millis = System.currentTimeMillis();
 		Date todDate = new java.util.Date(millis);
 		System.out.println(todDate);
-		return todDate ;
+		return todDate;
 	}
 
-	public long getRemainingDays(Date startDate,Date finishDate) {
-		return applicationService.getRemainingDays(startDate,finishDate);
+	public Integer getRemainingDays(Date startDate, Date finishDate) {
+		return 2+(int)applicationService.getRemainingDays(startDate, finishDate);
 	}
 
 	public Integer getApplicationId() {
@@ -189,12 +190,20 @@ public class ApplicationBean implements Serializable {
 		this.typeModel = typeModel;
 	}
 
-	public List<ApplicationModel> getApplications() {
-		return applications;
+	public List<ApplicationModel> getApprovedApplications() {
+		return approvedApplications;
 	}
 
-	public void setApplications(List<ApplicationModel> applications) {
-		this.applications = applications;
+	public void setApprovedApplications(List<ApplicationModel> approvedApplications) {
+		this.approvedApplications = approvedApplications;
+	}
+
+	public List<ApplicationModel> getRejectedApplications() {
+		return rejectedApplications;
+	}
+
+	public void setRejectedApplications(List<ApplicationModel> rejectedApplications) {
+		this.rejectedApplications = rejectedApplications;
 	}
 
 	public List<TypeModel> getTypes() {
@@ -212,6 +221,7 @@ public class ApplicationBean implements Serializable {
 	public void setSelectedType(String selectedType) {
 		this.selectedType = selectedType;
 	}
+
 	public List<ApplicationModel> getUserApplications() {
 		return userApplications;
 	}
@@ -225,7 +235,5 @@ public class ApplicationBean implements Serializable {
 		return "ApplicationBean [startDate=" + startDate + ", finishDate=" + finishDate + ", description=" + description
 				+ ", isApproved=" + isApproved + ", user=" + userModel + ", type=" + typeModel + "]";
 	}
-
-	
 
 }

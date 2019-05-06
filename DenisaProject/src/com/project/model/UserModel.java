@@ -1,8 +1,12 @@
 package com.project.model;
 
+import java.io.Serializable;
+
 import com.project.entity.Role;
 
-public class UserModel {
+public class UserModel implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private Integer userId;
 	private String firstname;

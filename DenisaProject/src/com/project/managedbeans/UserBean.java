@@ -92,7 +92,6 @@ public class UserBean implements Serializable{
 				HttpSession session = SessionUtils.getSession();
 				session.setAttribute("email", email);
 				session.setAttribute("userId", id);
-
 				session.setAttribute("role", role);
 				
 				switch (role) {

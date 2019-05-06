@@ -84,9 +84,14 @@
 						<p:column headerText="Type">
 							<h:outputText value="#{appVar.typeModel.type}" />
 						</p:column>
+						
+						<!-- <p:column style="width:50px" headerText="Approval">
+							<h:outputText value="#{appVar.isApproved}" />
+						</p:column> -->
+						
 						<p:column headerText="Days Remaining">
 							<h:outputText
-								value="#{applicationBean.getRemainingDays(appVar.startDate,appVar.finishDate)+1}" />
+								value="#{applicationBean.getRemainingDays(appVar.startDate,appVar.finishDate)}" />
 						</p:column>
 
 						<p:column style="width:85px">
