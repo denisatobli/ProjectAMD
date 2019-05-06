@@ -60,7 +60,7 @@ public class ApplicationBean implements Serializable {
 				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,
 						"Your application was successfully completed!", null));
 			} else {
-				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
 						"Your application was not completed, something went wrong!", null));
 			}
 		}
@@ -89,9 +89,9 @@ public class ApplicationBean implements Serializable {
 		FacesContext context = FacesContext.getCurrentInstance();
 
 		if (applicationService.deleteApplication(applicationId)) {
-			context.addMessage(null, new FacesMessage("Successful deleted", null));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO,"Successful deleted", null));
 		} else {
-			context.addMessage(null, new FacesMessage("Error!! Not deletetd", null));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,"Error!! Not deletetd", null));
 		}
 		return "/previousApplication?faces-redirect=true";
 	}
