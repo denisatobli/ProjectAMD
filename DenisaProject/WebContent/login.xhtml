@@ -23,15 +23,15 @@
 					<p:messages id="msgs" for="forms" severity="warn" />
 					<p:growl id="growl" severity="info" />
 					<p:inputText type="email" placeholder="Email" id="email"
-						value="#{user.email}" required="true"
+						value="#{login.email}" required="true"
 						requiredMessage="Please insert your email!" display="text" />
 					<p:messages for="email" />
 					<p:inputText type="password" placeholder="Password" id="password"
-						value="#{user.password}" required="true"
+						value="#{login.password}" required="true"
 						requiredMessage="Please insert your password!" display="icon" />
 					<p:messages for="password" />
 					<br />
-					<h:commandButton action="#{user.login}" value="Log In"
+					<h:commandButton action="#{login.login}" value="Log In"
 						update="msgs" class="btn btn-default"
 						style="background: #FE980F; color:#ffffff">
 					</h:commandButton>

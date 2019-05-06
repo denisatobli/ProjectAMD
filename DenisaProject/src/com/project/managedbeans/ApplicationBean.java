@@ -131,7 +131,7 @@ public class ApplicationBean implements Serializable {
 	}
 
 	public Integer getRemainingDays(Date startDate, Date finishDate) {
-		return 2+(int)applicationService.getRemainingDays(startDate, finishDate);
+		return 2 + (int) applicationService.getRemainingDays(startDate, finishDate);
 	}
 
 	public Integer getApplicationId() {
