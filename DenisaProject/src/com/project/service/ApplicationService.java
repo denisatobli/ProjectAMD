@@ -44,6 +44,9 @@ public class ApplicationService implements Serializable {
 
 	public boolean addApplication(Date startDate, Date finishDate, String description, UserModel userModel,
 			TypeModel typeModel) {
+		if(finishDate.compareTo(startDate) < 0) {
+			return false;
+		}
 		return applicationRepo.addApplication(startDate, finishDate, description,
 				UserConverter.modelToEntity(userModel), TypeConverter.modelToEntity(typeModel));
 	}
