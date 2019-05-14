@@ -73,7 +73,7 @@ public class ApplicationBean implements Serializable {
 		if (applicationService.updateApplicationApproval(applicationId, true)) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application approved!", null));
 		}
-		return "manageRejectedApplication";
+		return "manageRejectedApplication?faces-redirect=true";
 	}
 
 	public String rejectApplication(Integer applicationId) {
@@ -82,7 +82,7 @@ public class ApplicationBean implements Serializable {
 		if (applicationService.updateApplicationApproval(applicationId, false)) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application rejected!", null));
 		}
-		return "manageApprovedApplication";
+		return "manageApprovedApplication?faces-redirect=true";
 	}
 
 	public String deleteApplication(Integer applicationId) {
@@ -103,7 +103,7 @@ public class ApplicationBean implements Serializable {
 		if (applicationService.updateApplication(applicationModel)) {
 			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Application edited!", null));
 		} else {
-			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Application not edited!", null));
+			context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Application was not edited!", null));
 		}
 		return "previousApplications";
 	}
@@ -131,7 +131,7 @@ public class ApplicationBean implements Serializable {
 	}
 
 	public Integer getRemainingDays(Date startDate, Date finishDate) {
-		return 2 + (int) applicationService.getRemainingDays(startDate, finishDate);
+		return 1 + (int) applicationService.getRemainingDays(startDate, finishDate);
 	}
 
 	public Integer getApplicationId() {

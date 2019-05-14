@@ -4,13 +4,13 @@ import java.io.Serializable;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import com.project.model.UserModel;
 import com.project.service.UserService;
 
 @ManagedBean(name = "user")
-@SessionScoped
+@ViewScoped
 public class UserBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;

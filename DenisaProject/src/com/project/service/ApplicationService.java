@@ -60,6 +60,9 @@ public class ApplicationService implements Serializable {
 	}
 
 	public boolean updateApplication(ApplicationModel applicationModel) {
+		if(applicationModel.getFinishDate().compareTo(applicationModel.getStartDate()) < 0) {
+			return false;
+		}
 		applicationModel.setStartDate(applicationModel.getStartDate());
 		applicationModel.setFinishDate(applicationModel.getFinishDate());
 		applicationModel.setDescription(applicationModel.getDescription());
@@ -72,7 +75,7 @@ public class ApplicationService implements Serializable {
 		dateFormat.format(currentDate);
 		long diff;
 		if (finishDate.compareTo(currentDate) <= 0) {
-			return -2;
+			return -1;
 		} else if (startDate.compareTo(currentDate) < 0) {
 			diff = finishDate.getTime() - currentDate.getTime();
 		} else if (startDate.compareTo(currentDate) > 0) {

@@ -45,16 +45,16 @@
 
 					<p:outputLabel for="startDate" value="Start date : " />
 					<p:calendar id="startDate" value="#{applicationBean.startDate}"
-						pattern="yyyy-MM-dd" mask="true"
-						required="true"
+						mindate="#{applicationBean.getCurrentDate()}" pattern="yyyy-MM-dd"
+						mask="true" required="true"
 						requiredMessage="Insert start date for your application!">
 						<f:convertDateTime pattern="yyyy-MM-dd" />
 					</p:calendar>
 					<br />
 					<p:outputLabel for="finishDate" value="Finish date : " />
 					<p:calendar id="finishDate" value="#{applicationBean.finishDate}"
-						pattern="yyyy-MM-dd" mask="true"
-						required="true"
+						mindate="#{applicationBean.getCurrentDate()}" pattern="yyyy-MM-dd"
+						mask="true" required="true"
 						requiredMessage="Insert finish date for your application!">
 						<f:convertDateTime pattern="yyyy-MM-dd" />
 					</p:calendar>
